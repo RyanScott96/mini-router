@@ -15,8 +15,6 @@ pub struct ErrorPacket {
     pub location: GridTile,
 }
 
-pub struct BadDeliveryMessage {}
-
 #[derive(Message)]
 pub struct CollisionMessage {
     pub location: GridTile,
