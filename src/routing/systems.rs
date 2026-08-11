@@ -79,28 +79,27 @@ pub fn process_network(
 
         // If a packet is on a network sink
         // then it is delievered and needs despawned
-        if let Ok((_, _, packet_data)) = packets.get(packet_entity) {
-            if let Some(&sink_entity) = grid.sinks.get(&tile) {
-                if let Ok(sink) = sinks.get(sink_entity) {
-                    // Packet is Good if same color
-                    if sink.color == packet_data.color {
-                        delivery_writer.write(SuccessPacket {
-                            color: sink.color,
-                            location: tile,
-                        });
-                    }
-                    // Packet is Bad if diff color
-                    else {
-                        mismatch_writer.write(ErrorPacket {
-                            expected: sink.color,
-                            actual: packet_data.color,
-                            location: tile,
-                        });
-                    }
-
-                    commands.entity(packet_entity).despawn();
-                }
+        if let Ok((_, _, packet_data)) = packets.get(packet_entity)
+            && let Some(&sink_entity) = grid.sinks.get(&tile)
+            && let Ok(sink) = sinks.get(sink_entity)
+        {
+            // Packet is Good if same color
+            if sink.color == packet_data.color {
+                delivery_writer.write(SuccessPacket {
+                    color: sink.color,
+                    location: tile,
+                });
             }
+            // Packet is Bad if diff color
+            else {
+                mismatch_writer.write(ErrorPacket {
+                    expected: sink.color,
+                    actual: packet_data.color,
+                    location: tile,
+                });
+            }
+
+            commands.entity(packet_entity).despawn();
         }
     }
 }
