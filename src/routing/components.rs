@@ -60,7 +60,7 @@ pub struct NetworkSink {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum PacketColor {
-    RED,
-    GREEN,
-    BLUE,
+    Red,
+    Green,
+    Blue,
 }
