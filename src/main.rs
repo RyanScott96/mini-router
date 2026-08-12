@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 use crate::routing::RoutingPlugin;
 
+pub mod input;
 pub mod routing;
 pub mod sync;
 
